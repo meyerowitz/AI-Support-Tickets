@@ -5,11 +5,12 @@ import LoginModal from "../modals/LoginModal";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient"; // 🚀 Importamos tu cliente de Supabase
 import { useRouter } from "next/navigation"; // 🚀 Importamos para poder redirigir al cerrar sesión
+import { Session } from "@supabase/supabase-js"; 
 
 export default function Navbar() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegis, setIsRegis] = useState(false);
-  const [session, setSession] = useState(null); // 💡 Estado para controlar si hay usuario logueado
+  const [session, setSession] = useState<Session | null>(null); // 💡 Estado para controlar si hay usuario logueado
   
   const router = useRouter();
 

@@ -7,12 +7,13 @@ import UsersView from "@/components/dashboard/pages/UsersView";
 import TicketsView from "@/components/dashboard/pages/TicketsView";
 import NewTicketsView from "@/components/dashboard/pages/NewTicketsView";
 import MainView from "@/components/dashboard/pages/MainView";
+import { Session } from "@supabase/supabase-js"; 
 
 export const dynamic = "force-dynamic";
 
 function DashboardContent() {
   const [isMounted, setIsMounted] = useState(false);
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [activeTab, setActiveTab] = useState("Dashboard");
   
   const searchParams = useSearchParams();
