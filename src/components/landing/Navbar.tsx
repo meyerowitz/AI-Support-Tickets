@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 z-50 w-full bg-[#050b24]/70 backdrop-blur-md border-b border-white/5 px-6 py-4">
+    <nav className="fixed top-0 z-50 w-full bg-[#050b24]/70 backdrop-blur-md border-b border-white/5 px-6 py-4 rounded-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         {/* Logo de la marca */}
         <div className="flex items-center gap-2 text-white font-bold text-xl tracking-tight">
@@ -12,10 +12,10 @@ export default function Navbar() {
 
         {/* Menú de Navegación del Centro */}
         <div className="hidden md:flex items-center gap-8 text-sm text-gray-300">
-          <Link href="#" className="hover:text-white transition-colors">Home</Link>
-          <Link href="#" className="hover:text-white transition-colors">Features</Link>
-          <Link href="#" className="hover:text-white transition-colors">How it Works</Link>
-          <Link href="#" className="hover:text-white transition-colors">FAQ</Link>
+          <Link href="/" className="hover:text-white transition-colors">Home</Link>
+          <Link href="/features" className="hover:text-white transition-colors">Features</Link>
+          <Link href="/works" className="hover:text-white transition-colors">How it Works</Link>
+          <Link href="/fag" className="hover:text-white transition-colors">FAQ</Link>
         </div>
 
         {/* CTAs de Ingreso */}

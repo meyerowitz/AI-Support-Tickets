@@ -1,12 +1,27 @@
+"use client"
 import Link from "next/link";
 import Beams from "@/components/ui/Beams"; // Ajusta la ruta si es necesario
 import Fondo from "@/assets/fondo.jpg";
+import Grainient from "../Grainient"
+import ClickSpark from "../ClickSpark"
+import Particles from '../Particles';
+import Image from "next/image";
+
+import Image1 from "@/assets/image2.jpg"
+import Image2 from "@/assets/image10.jpg"
+import Image3 from "@/assets/image9.jpg"
+import Pestana from "@/assets/pestana.png"
+
+import PestanaDivider from "../ui/PestanaDivider";
 
 export default function Hero() {
   return (
+   
     <section 
-      style={{ backgroundImage: `url(${Fondo.src})` }} 
-      className="bg-cover bg-center relative min-h-screen bg-no-repeat pt-32 pb-24 overflow-hidden px-6 flex flex-col items-center justify-center"
+      style={{ 
+        
+        backgroundImage: `url(${Fondo.src})` }} 
+      className="bg-cover  relative min-h-screen bg-no-repeat pt-32 pb-24 overflow-hidden px-6 flex flex-col items-center justify-center"
     >
       
       {/* CONTENEDOR DE BEAMS TRANSPARENTE EN EL FONDO 
@@ -22,7 +37,25 @@ export default function Hero() {
           rotation={30}
         />
       </div>
+
       */}
+      {/* CONTENEDOR DE BEAMS TRANSPARENTE EN EL FONDO
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
+      <Particles
+          particleColors={["#ffffff"]}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover
+          alphaParticles={false}
+          disableRotation={false}
+          pixelRatio={1}
+        />
+        </div>
+      */}
+      
+     
       {/* Luces y Efectos de Gradiente de Fondo originales */}
       <div className="absolute top-[-20%] left-[10%] w-[600px] h-[600px] bg-blue-600/20 blur-[150px] rounded-full pointer-events-none z-0" />
       <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-indigo-500/10 blur-[130px] rounded-full pointer-events-none z-0" />
@@ -43,7 +76,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="mt-6 max-w-xl text-base text-gray-400 sm:text-lg">
+        <p className="animate-typing  mt-6 max-w-xl text-base text-amber-50 sm:text-lg">
           Automate classifications, predict escalations, and handle user requests effortlessly with our intelligent platform.
         </p>
 
@@ -66,8 +99,13 @@ export default function Hero() {
               <h3 className="text-4xl font-black text-[#050b24] mt-2">13,200</h3>
               <p className="text-xs text-gray-400 mt-1">Tickets answered instantly</p>
             </div>
-            <div className="mt-8 h-20 w-full bg-gray-50 border border-dashed border-gray-200 rounded-xl flex items-center justify-center text-xs text-gray-400">
-              [ Placeholder: Gráfico de Líneas ]
+            <div className="overflow-hidden mt-6 h-24 w-full relative rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
+              <Image 
+                src={Image1} 
+                alt="Analytics Line Chart Dashboard"
+                fill
+                className="object-cover opacity-90 filter contrast-125 mix-blend-multiply"
+              />
             </div>
           </div>
 
@@ -80,25 +118,38 @@ export default function Hero() {
               <h4 className="text-lg font-bold text-[#050b24] mt-3">Scanning Incidents In Real-Time</h4>
               <p className="text-xs text-gray-500 mt-1">94% precision accuracy in categorization</p>
             </div>
-            <div className="mt-6 h-36 w-full bg-gray-100 rounded-2xl overflow-hidden relative border border-gray-200 flex items-center justify-center text-xs text-gray-400">
-              [ Placeholder: Imagen Principal ]
+            <div className="overflow-hidden mt-6 h-36 w-full bg-gray-100 rounded-2xl overflow-hidden relative border border-gray-200 flex items-center justify-center text-xs text-gray-400">
+              <Image 
+                src={Image2} 
+                alt="Analytics Line Chart Dashboard"
+                fill
+                className="object-cover opacity-90 filter contrast-125 mix-blend-multiply"
+              />
             </div>
           </div>
 
-          <div className="bg-white/10 text-left p-6 rounded-3xl border border-white/10 backdrop-blur-md flex flex-col justify-between transform rotate-1 hover:rotate-0 transition-transform duration-300">
+          <div className="bg-white/10 text-left p-6 overflow-hidden rounded-3xl border border-white/10 backdrop-blur-md flex flex-col justify-between transform rotate-1 hover:rotate-0 transition-transform duration-300">
             {/* Contenido tarjeta 3 */}
             <div>
-              <span className="text-xs text-blue-300 font-medium">Critical Risk Detector</span>
+              <span className="text-xs text-white font-medium">Critical Risk Detector</span>
               <h3 className="text-xl font-bold text-white mt-3">High Priority Detected</h3>
-              <p className="text-xs text-gray-400 mt-1">Saves up to 28% SLA breaches using predictions</p>
+              <p className="text-xs text-white mt-1">Saves up to 28% SLA breaches using predictions</p>
             </div>
-            <div className="mt-12 h-24 w-full bg-white/5 border border-dashed border-white/10 rounded-xl flex items-center justify-center text-xs text-gray-400">
-              [ Placeholder: Vista de Detalle ]
+            <div className="overflow-hidden mt-12 h-24 w-full bg-white/5 border border-dashed border-white/10 rounded-xl flex items-center justify-center text-xs text-gray-400">
+              <Image 
+                src={Image3} 
+                alt="Analytics Line Chart Dashboard"
+                fill
+                className="object-cover opacity-90 filter contrast-125 mix-blend-multiply"
+              />
             </div>
           </div>
+          
         </div>
-
+        
       </div>
+      <PestanaDivider />
     </section>
+  
   );
 }
