@@ -82,7 +82,7 @@ export default function Hero() {
 
         {/* Botón Central de Búsqueda/Acción */}
         <div className="mt-10">
-          <Link href="/dashboard" className="inline-flex items-center gap-3 bg-white hover:bg-gray-100 text-[#050b24] font-semibold px-8 py-4 rounded-full transition-all shadow-xl text-sm">
+          <Link href="/dashboard" className="transition-all duration-300 transform hover:-translate-y-[2px] hover:shadow-xl hover:shadow-blue-500/30 active:translate-y-0 inline-flex items-center gap-3 bg-white hover:bg-gray-100 text-[#050b24] font-semibold px-8 py-4 rounded-full transition-all shadow-xl text-sm">
             <span>Explore Dashboard Now</span>
             <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">→</div>
           </Link>
