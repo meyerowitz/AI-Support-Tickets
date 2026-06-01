@@ -26,10 +26,6 @@ export default function FAQ() {
     }
   ];
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
     <section className="bg-[#050b24] py-24 px-6 relative overflow-hidden border-t border-white/5">
       {/* Detalle de luz difusa en el fondo a la derecha */}
@@ -65,7 +61,7 @@ export default function FAQ() {
               >
                 {/* Botón de la Pregunta */}
                 <button
-                  onClick={() => toggleFAQ(index)}
+                  onClick={() => {}}
                   className="w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none"
                 >
                   <span className="text-sm sm:text-base font-semibold text-white tracking-wide">
