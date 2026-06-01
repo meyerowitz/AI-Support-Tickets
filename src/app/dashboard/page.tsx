@@ -1,24 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react"; // 1. Mantenemos el Suspense importado
 import { useSearchParams } from "next/navigation";
 import Sidebar from "@/components/dashboard/Sidebar";
-import UsersView from "@/components/dashboard/pages/UsersView"
-import Statistics from "@/components/dashboard/pages/Statistics"
+import UsersView from "@/components/dashboard/pages/UsersView";
+import TicketsView from "@/components/dashboard/pages/TicketsView";
+import NewTicketsView from "@/components/dashboard/pages/NewTicketsView";
+import MainView from "@/components/dashboard/pages/MainView";
 
-import TicketsView from "@/components/dashboard/pages/TicketsView"
-import NewTicketsView from "@/components/dashboard/pages/NewTicketsView"
-import MainView from "@/components/dashboard/pages/MainView"
-
-
-export default function DashboardPage() {
+// ─── 🛠️ COMPONENTE INTERNO (MUEVE TU LÓGICA AQUÍ) ───
+// Renombramos la función a "DashboardContent"
+function DashboardContent() {
   const [activeTab, setActiveTab] = useState("Dashboard");
   const searchParams = useSearchParams();
   
-  // Captura el rol de la URL (?role=admin), si no viene ninguno usa "client" por defecto
+  // Captura el rol de la URL (?role=admin), si no viene ninguno usa "client" por defecto [cite: 150]
   const currentUserRole = searchParams.get("role") || "client";
-  // 💡 En un entorno real, este rol vendría de tu sesión (ej. Supabase Auth o JWT)
-  // Como es "admin", el Sidebar le habilitará las pestañas "users" y "settings".
-  
 
   // 🚀 FUNCIÓN DE RENDERIZADO DINÁMICO
   const renderContentView = () => {
@@ -30,7 +26,6 @@ export default function DashboardPage() {
       case "MisTicket":
         return <NewTicketsView />;
       case "users":
-        // Cuando activeTab sea "users", se montará el componente que creamos
         return <UsersView />;
       default:
         return <MainView userRole={currentUserRole}/>;
@@ -41,7 +36,6 @@ export default function DashboardPage() {
     <div className="flex h-screen w-screen bg-[#f8fafc] text-slate-800 overflow-hidden font-sans">
       
       {/* SIDEBAR MODULAR */}
-      {/* Le pasamos el rol (admin) y las funciones de control del estado */}
       <Sidebar 
         userRole={currentUserRole} 
         activeTab={activeTab} 
@@ -68,13 +62,25 @@ export default function DashboardPage() {
         {/* ESPACIO DE TRABAJO DINÁMICO */}
         <section className="flex-1 overflow-y-auto p-8 bg-[#f8fafc]">
           <div className="max-w-5xl mx-auto w-full">
-            {/* 🚀 Aquí se inyecta la vista correspondiente según el estado del Sidebar */}
             {renderContentView()}
           </div>
         </section>
 
       </main>
-
     </div>
+  );
+}
+
+// ─── 🚀 EXPORTACIÓN POR DEFECTO (EL CONTENEDOR MAESTRO) ───
+// Este es el componente que Next.js buscará al compilar la página de producción[cite: 91, 143].
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex h-screen w-screen items-center justify-center bg-[#f8fafc] text-sm font-medium text-gray-500">
+        Cargando espacio de trabajo...
+      </div>
+    }>
+      <DashboardContent />
+    </Suspense>
   );
 }
