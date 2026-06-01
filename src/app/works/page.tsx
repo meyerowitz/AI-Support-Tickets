@@ -1,6 +1,8 @@
 import { ArrowRight, Terminal, Brain, LayoutDashboard } from "lucide-react";
 import Navbar
  from "@/components/landing/Navbar";
+import Beams from "@/components/ui/Beams";
+
 export default function HowItWorks() {
   const steps = [
     {
@@ -25,6 +27,18 @@ export default function HowItWorks() {
 
   return (
     <section className="bg-[#050b24] py-24 px-6 relative overflow-hidden border-t border-white/5">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
+        <Beams
+          beamWidth={3}
+          beamHeight={30}
+          beamNumber={20}
+          lightColor="#ffffff"
+          speed={2}
+          noiseIntensity={1.75}
+          scale={0.2}
+          rotation={30}
+        />
+      </div>
       {/* Detalle de luz ambiental difusa abajo a la izquierda */}
         <Navbar></Navbar>
       <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/5 blur-[150px] rounded-full pointer-events-none" />

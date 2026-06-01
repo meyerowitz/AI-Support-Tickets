@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
+import Beams from "@/components/ui/Beams";
 
 export default function FAQ() {
   // Estado para controlar qué pregunta está abierta (guarda el índice)
@@ -28,6 +29,18 @@ export default function FAQ() {
 
   return (
     <section className="bg-[#050b24] py-24 px-6 relative overflow-hidden border-t border-white/5">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
+        <Beams
+          beamWidth={3}
+          beamHeight={30}
+          beamNumber={20}
+          lightColor="#ffffff"
+          speed={2}
+          noiseIntensity={1.75}
+          scale={0.2}
+          rotation={30}
+        />
+      </div>
       {/* Detalle de luz difusa en el fondo a la derecha */}
         <Navbar/>
       <div className="absolute top-[-10%] right-[-5%] w-[450px] h-[450px] bg-blue-600/5 blur-[140px] rounded-full pointer-events-none" />

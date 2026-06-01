@@ -1,6 +1,7 @@
 "use client"
 import { Shield, Zap, BarChart3 } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
+import Beams from "@/components/ui/Beams";
 
 export default function Features() {
   const featuresList = [
@@ -23,6 +24,18 @@ export default function Features() {
 
   return (
     <section className="bg-[#050b24] py-24 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
+        <Beams
+          beamWidth={3}
+          beamHeight={30}
+          beamNumber={20}
+          lightColor="#ffffff"
+          speed={2}
+          noiseIntensity={1.75}
+          scale={0.2}
+          rotation={30}
+        />
+      </div>
       {/* Luces de fondo sutiles para dar continuidad al Hero */}
         <Navbar/>
       <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
