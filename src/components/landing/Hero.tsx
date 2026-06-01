@@ -24,7 +24,9 @@ export default function Hero() {
       className="bg-cover  relative min-h-screen bg-no-repeat pt-32 pb-24 overflow-hidden px-6 flex flex-col items-center justify-center"
     >
        
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
+      
+      {/* CONTENEDOR DE BEAMS TRANSPARENTE EN EL FONDO
+<div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
         <Beams
           beamWidth={3}
           beamHeight={30}
@@ -36,7 +38,7 @@ export default function Hero() {
           rotation={30}
         />
       </div>
-      {/* CONTENEDOR DE BEAMS TRANSPARENTE EN EL FONDO
+
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
       <Particles
           particleColors={["#ffffff"]}
