@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"; 
 import { Eye, EyeOff, Shield } from "lucide-react";
 import Image from "next/image";
-import Image2 from "@/assets/image.jpg";
+import Image2 from "@/assets/image.webp";
 import Image3 from "@/assets/image12.jpg";
 // 🚀 Importamos tu cliente centralizado de Supabase
 import { supabase } from "@/lib/supabaseClient"; 

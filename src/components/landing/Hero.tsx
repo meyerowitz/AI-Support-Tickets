@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import Beams from "@/components/ui/Beams"; // Ajusta la ruta si es necesario
-import Fondo from "@/assets/fondo.jpg";
+import Fondo from "@/assets/fondo.webp";
 import Grainient from "../Grainient"
 import ClickSpark from "../ClickSpark"
 import Particles from '../Particles';
@@ -10,7 +10,6 @@ import Image from "next/image";
 import Image1 from "@/assets/image2.jpg"
 import Image2 from "@/assets/image10.jpg"
 import Image3 from "@/assets/image9.jpg"
-import Pestana from "@/assets/pestana.png"
 
 import PestanaDivider from "../ui/PestanaDivider";
 
@@ -18,11 +17,18 @@ export default function Hero() {
   return (
    
     <section 
-      style={{ 
-        
-        backgroundImage: `url(${Fondo.src})` }} 
       className="bg-cover  relative min-h-screen bg-no-repeat pt-32 pb-24 overflow-hidden px-6 flex flex-col items-center justify-center"
     >
+      <Image
+        src={Fondo}
+        alt="Fondo abstracto con gradientes"
+        placeholder="blur"
+        quality={85}
+        fill
+        sizes="100vw"
+        className="object-cover object-up z-0 pointer-events-none"
+        priority
+      />
        <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-35"> 
         <Beams
           beamWidth={3}
@@ -70,7 +76,7 @@ export default function Hero() {
         {/* Título Principal Estilo AirLume */}
         <h1 className="max-w-4xl text-4xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl leading-[1.1]">
           Save Time & Money <br />
-          <span className="bg-gradient-to-r from-blue-400 via-indigo-200 to-white bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#040e67]  to-white bg-clip-text text-transparent">
             On Every Ticket
           </span>
         </h1>

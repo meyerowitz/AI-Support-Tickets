@@ -46,7 +46,7 @@ function DashboardContent() {
     switch (activeTab) {
       case "Dashboard": return <MainView userRole={currentUserRole}/>;
       case "tickets": return <TicketsView />;
-      case "MisTicket": return <NewTicketsView />;
+      case "MisTicket": return <NewTicketsView/>;
       case "users": return <UsersView />;
       default: return <MainView userRole={currentUserRole}/>;
     }
