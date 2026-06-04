@@ -73,6 +73,7 @@ export default function NewTicketsView() {
   }, []);
 
   // 🤖 PIPELINE DE SIMULACIÓN AUTOMÁTICA CON GUARDADO EN BD
+  
   useEffect(() => {
     if (loading || refreshingTicketId) return;
 
@@ -98,53 +99,44 @@ export default function NewTicketsView() {
 
         // 🏁 Fin del proceso (Pasa a paso 3 de Auditoría / Guardado)
         if (progressRef.current >= 5500) {
-          clearInterval(timerRef.current);
-          
-          // Simular si el proceso fue Exitoso (Resuelto) o Fallido de forma aleatoria (85% éxito)
-          const isSuccessful = Math.random() > 0.15;
-          const finalStatus = isSuccessful ? "resuelto" : "fallido";
-          
-          const updatedSummary = isSuccessful 
-            ? "Análisis automático de optimización: Solicitud entrante validada de manera correcta. Se sugiere reajuste de cuotas escalonadas en producción."
-            : "Error de ejecución en el Pipeline: No se pudo conectar con los modelos de auditoría externa. Llave de API expirada o denegada.";
-          
-          const finalPriority = isSuccessful ? "media" : "alta";
+  
+  // 1. Consultamos el estado real en Supabase
+  const { data: ticket, error } = await supabase
+    .from("tickets")
+    .select("status, ai_summary, ai_suggestions, ai_risk_level, priority")
+    .eq("id", activeSimulationId)
+    .single();
 
-          const updatedFields = {
-            status: finalStatus,
-            priority: finalPriority,
-            ai_summary: updatedSummary
-          };
-
-          try {
-            // 💾 Guardar el estado final directamente en Supabase
-            const { error } = await supabase
-              .from("tickets")
-              .update(updatedFields)
-              .eq("id", activeSimulationId);
-
-            if (error) throw error;
-
-            // 🔄 Actualizar el estado global en el Frontend
-            setMyTickets((prevTickets) =>
-              prevTickets.map((t) => {
-                if (t.id === activeSimulationId) {
-                  const updated = { ...t, ...updatedFields };
-                  if (selectedTicket?.id === t.id) {
-                    setSelectedTicket(updated);
-                  }
-                  return updated;
-                }
-                return t;
-              })
-            );
-          } catch (err) {
-            console.error("Error al guardar conclusión del ticket en Supabase:", err.message);
-          } finally {
-            setActiveSimulationId(null);
-            setSimulatingStep(null);
+  // 2. Verificamos si n8n ya procesó el ticket (status diferente a 'en-progreso')
+  if (!error && ticket && ticket.status !== "en-progreso") {
+    
+    // ✅ CASO ÉXITO: n8n ya actualizó la BD, detenemos el timer y aplicamos los datos
+    clearInterval(timerRef.current);
+    
+    setMyTickets((prevTickets) =>
+      prevTickets.map((t) => {
+        if (t.id === activeSimulationId) {
+          const updated = { ...t, ...ticket };
+          if (selectedTicket?.id === t.id) {
+            setSelectedTicket(updated);
           }
+          return updated;
         }
+        return t;
+      })
+    );
+    
+    setActiveSimulationId(null);
+    setSimulatingStep(null);
+    progressRef.current = 0; // Reset para futuros tickets
+
+  } else {
+    // 🔄 CASO ESPERA: n8n sigue trabajando, reiniciamos el ciclo visual (bucle)
+    progressRef.current = 0;
+    setSimulatingStep(1); 
+    console.log("Esperando respuesta de n8n...");
+  }
+}
       }, 100);
     }
 
@@ -152,6 +144,9 @@ export default function NewTicketsView() {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [myTickets, loading, activeSimulationId, isPaused, selectedTicket, refreshingTicketId]);
+
+
+
 
   const handleTogglePause = () => setIsPaused(!isPaused);
 
