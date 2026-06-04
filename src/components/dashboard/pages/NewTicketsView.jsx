@@ -147,6 +147,24 @@ export default function NewTicketsView() {
 
 
 
+  const triggerN8NWorkflow = async (ticket) => {
+  try {
+    const response = await fetch(process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        ticket_id: ticket.id, 
+        title: ticket.title, 
+        description: ticket.description 
+      }),
+    });
+    
+    if (!response.ok) throw new Error("Error al contactar n8n");
+    console.log("n8n recibió la señal correctamente");
+  } catch (error) {
+    console.error("Fallo al disparar el webhook:", error);
+  }
+};
 
   const handleTogglePause = () => setIsPaused(!isPaused);
 
