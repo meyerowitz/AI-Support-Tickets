@@ -75,12 +75,14 @@ export default function NewTicketsView() {
   // 🤖 PIPELINE DE SIMULACIÓN AUTOMÁTICA CON GUARDADO EN BD
   
   useEffect(() => {
-    if (loading || refreshingTicketId) return;
+    console.log("pipeline se activo")
+    if (loading || refreshingTicketId ) return;
 
     // Busca un ticket en progreso que aún no tenga resumen asignado
     const ticketToProcess = myTickets.find(
       (t) => t.status === "en-progreso" && !t.ai_summary && t.id !== activeSimulationId
     );
+    if(ticketToProcess.status === "resuelto") return;
 
     if (ticketToProcess && !activeSimulationId) {
       setActiveSimulationId(ticketToProcess.id);
