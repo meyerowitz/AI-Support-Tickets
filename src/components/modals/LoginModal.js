@@ -221,23 +221,6 @@ export default function LoginModal({ isOpen, onClose, isRegister, setIsRegister 
                 </div>
               </div>
 
-              {/* SELECTOR DE ROL (Ahora inyecta metadatos reales al registro) */}
-              <div className="bg-gray-50 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between gap-2 mt-2">
-                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <Shield size={13} className="text-blue-500" />
-                  Asignar Rol:
-                </span>
-                <select
-                  value={selectedRole}
-                  onChange={(e) => setSelectedRole(e.target.value)}
-                  disabled={loading}
-                  className="bg-white border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 py-1 px-2.5 outline-none cursor-pointer focus:border-blue-500 disabled:opacity-50"
-                >
-                  <option value="client">Cliente estándar</option>
-                  <option value="agent">Agente de Soporte</option>
-                  <option value="admin">Administrador</option>
-                </select>
-              </div>
 
               {/* Opciones extras (Solo visibles en Modo Login) */}
               {!isRegister && (
